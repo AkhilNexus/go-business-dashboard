@@ -1,0 +1,54 @@
+.share-referral-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.share-heading {
+  margin-bottom: 20px;
+}
+
+.referral-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.referral-box {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.referral-label {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.copy-container {
+  display: flex;
+  gap: 10px;
+}
+
+.referral-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+}
+
+.copy-btn {
+  border: none;
+  background-color: #6366f1;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  opacity: 0.9;
+}
