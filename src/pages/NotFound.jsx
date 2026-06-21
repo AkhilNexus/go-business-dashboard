@@ -1,13 +1,21 @@
-import { Link } from "react-router-dom";
+import {Link} from 'react-router-dom'
 
-const NotFound = () => {
-  return (
-    <div>
-      <h1>404</h1>
-      <p>Page not found</p>
-      <Link to="/">Back to dashboard</Link>
-    </div>
-  );
-};
+import '../styles/NotFound.css'
 
-export default NotFound;
+const NotFound = () => (
+  <div className="not-found-container">
+    <h1 className="not-found-heading">
+      404
+    </h1>
+
+    <p className="not-found-text">
+      Page Not Found
+    </p>
+
+    <Link to="/" className="back-link">
+      Back to Dashboard
+    </Link>
+  </div>
+)
+
+export default NotFound

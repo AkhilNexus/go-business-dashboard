@@ -68,6 +68,9 @@ const Dashboard = () => {
 
     <div className="dashboard-container">
       <h1>Referral Dashboard</h1>
+      <p className="dashboard-subtitle">
+        Track your referrals, earnings, and partner activity in one place.
+      </p>
 
       <Overview metrics={metrics} />
 

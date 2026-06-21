@@ -97,7 +97,7 @@ const ReferralsTable = ({referrals}) => {
                 {item.date.replaceAll('-', '/')}
               </td>
 
-              <td>
+              <td className="profit-value">
                 {new Intl.NumberFormat('en-US', {
                   style: 'currency',
                   currency: 'USD',
@@ -108,15 +108,34 @@ const ReferralsTable = ({referrals}) => {
           ))}
         </tbody>
       </table>
-
+      <p className="entries-text">
+        Showing {startIndex + 1}–
+        {Math.min(endIndex, filteredReferrals.length)}
+        {' '}of {filteredReferrals.length} entries
+      </p>
       <div className="pagination-container">
+        <button
+          type="button"
+          className="page-btn"
+          disabled={currentPage === 1}
+          onClick={() =>
+            setCurrentPage(currentPage - 1)
+          }
+        >
+          Previous
+        </button>
+
         {Array.from(
           {length: totalPages},
           (_, index) => (
             <button
               key={index}
               type="button"
-              className="page-btn"
+              className={
+                currentPage === index + 1
+                  ? 'page-btn active'
+                  : 'page-btn'
+              }
               onClick={() =>
                 setCurrentPage(index + 1)
               }
@@ -125,6 +144,17 @@ const ReferralsTable = ({referrals}) => {
             </button>
           ),
         )}
+
+        <button
+          type="button"
+          className="page-btn"
+          disabled={currentPage === totalPages}
+          onClick={() =>
+            setCurrentPage(currentPage + 1)
+          }
+        >
+          Next
+        </button>
       </div>
     </div>
   )

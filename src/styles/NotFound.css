@@ -1,0 +1,36 @@
+.not-found-container {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: #f8fafc;
+}
+
+.not-found-heading {
+  font-size: 120px;
+  font-weight: 700;
+  color: #0f172a;
+
+  margin: 0;
+}
+
+.not-found-text {
+  color: #64748b;
+  font-size: 18px;
+
+  margin: 16px 0 32px;
+}
+
+.back-link {
+  text-decoration: none;
+
+  background: #6366f1;
+  color: white;
+
+  padding: 12px 24px;
+
+  border-radius: 8px;
+}

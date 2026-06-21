@@ -7,7 +7,10 @@ const ServiceSummary = ({serviceSummary}) => (
     <div className="summary-list">
       <div className="summary-card">
         <p className="summary-label">SERVICE</p>
-        <h3>{serviceSummary.service}</h3>
+
+        <h3 className="service-name">
+          {serviceSummary.service}
+        </h3>
       </div>
 
       <div className="summary-card">

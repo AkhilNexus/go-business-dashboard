@@ -6,9 +6,9 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   const logout = () => {
-    Cookies.remove('jwt_token')
-    navigate('/login')
-  }
+  Cookies.remove('jwt_token')
+  navigate('/login', {replace: true})
+}
 
   return (
     <nav className="navbar">

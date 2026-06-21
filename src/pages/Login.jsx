@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Navigate} from 'react-router-dom'
 
 import '../styles/Login.css'
 
@@ -11,6 +11,12 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
+
+  // If user is already logged in,
+  // don't allow access to login page
+  if (Cookies.get('jwt_token')) {
+    return <Navigate to="/" replace />
+  }
 
   const onSubmitForm = async event => {
     event.preventDefault()
@@ -24,28 +30,37 @@ const Login = () => {
         },
       )
 
-      const token = response.data.data.token
+      const jwtToken = response.data.data.token
 
-      Cookies.set('jwt_token', token)
+      Cookies.set('jwt_token', jwtToken, {
+        expires: 7,
+      })
 
-      navigate('/')
+      navigate('/', {replace: true})
     } catch (error) {
       setErrorMsg(
-        error.response?.data?.message || 'Invalid email or password',
+        error?.response?.data?.message ||
+          'Invalid email or password',
       )
     }
   }
 
   return (
     <div className="login-bg">
-      <form className="login-card" onSubmit={onSubmitForm}>
+      <form
+        className="login-card"
+        onSubmit={onSubmitForm}
+      >
         <h1 className="logo-text">Go Business</h1>
 
         <p className="login-subtitle">
           Sign in to open your referral dashboard.
         </p>
 
-        <label htmlFor="email" className="login-label">
+        <label
+          htmlFor="email"
+          className="login-label"
+        >
           Email
         </label>
 
@@ -56,9 +71,13 @@ const Login = () => {
           className="login-input"
           value={email}
           onChange={e => setEmail(e.target.value)}
+          required
         />
 
-        <label htmlFor="password" className="login-label">
+        <label
+          htmlFor="password"
+          className="login-label"
+        >
           Password
         </label>
 
@@ -69,13 +88,22 @@ const Login = () => {
           className="login-input"
           value={password}
           onChange={e => setPassword(e.target.value)}
+          required
+          autoComplete="current-password"
         />
 
-        <button type="submit" className="login-btn">
+        <button
+          type="submit"
+          className="login-btn"
+        >
           Sign in
         </button>
 
-        {errorMsg && <p className="error-msg">{errorMsg}</p>}
+        {errorMsg && (
+          <p className="error-msg">
+            {errorMsg}
+          </p>
+        )}
       </form>
     </div>
   )
