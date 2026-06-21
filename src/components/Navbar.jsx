@@ -12,16 +12,24 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="logo">
-        Go Business
-      </Link>
+      <div className="navbar-container">
+        <Link to="/" className="logo">
+          Go Business
+        </Link>
 
-      <div className="nav-links">
-        <Link to="/">Home</Link>
+        <div className="nav-links">
+          <button type="button" className="try-btn">
+            Try for free
+          </button>
 
-        <button type="button" onClick={logout}>
-          Log out
-        </button>
+          <button
+            type="button"
+            className="logout-btn"
+            onClick={logout}
+          >
+            Log out
+          </button>
+        </div>
       </div>
     </nav>
   )

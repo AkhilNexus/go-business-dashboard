@@ -1,3 +1,4 @@
+import '../styles/Dashboard.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ReferralsTable from '../components/ReferralsTable'

@@ -1,90 +1,84 @@
-import { useState } from "react";
-import axios from "axios";
-import Cookies from "js-cookie";
-import { Navigate, useNavigate } from "react-router-dom";
+import {useState} from 'react'
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import {useNavigate} from 'react-router-dom'
 
-import { LOGIN_API } from "../services/api";
+import '../styles/Login.css'
 
 const Login = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const token = Cookies.get("jwt_token");
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [errorMsg, setErrorMsg] = useState('')
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-
-  if (token) {
-    return <Navigate to="/" replace />;
-  }
-
-  const submitForm = async (e) => {
-    e.preventDefault();
+  const onSubmitForm = async event => {
+    event.preventDefault()
 
     try {
-      const response = await axios.post(LOGIN_API, {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        'https://v9fes04dwf.execute-api.eu-north-1.amazonaws.com/api/auth/signin',
+        {
+          email,
+          password,
+        },
+      )
 
-      const jwtToken = response.data.data.token;
+      const token = response.data.data.token
 
-      Cookies.set("jwt_token", jwtToken);
+      Cookies.set('jwt_token', token)
 
-      navigate("/");
+      navigate('/')
     } catch (error) {
       setErrorMsg(
-        error?.response?.data?.message || "Invalid email or password"
-      );
+        error.response?.data?.message || 'Invalid email or password',
+      )
     }
-  };
+  }
 
   return (
-    <div>
-      <h1>Go Business</h1>
+    <div className="login-bg">
+      <form className="login-card" onSubmit={onSubmitForm}>
+        <h1 className="logo-text">Go Business</h1>
 
-      <p>Sign in to open your referral dashboard.</p>
+        <p className="login-subtitle">
+          Sign in to open your referral dashboard.
+        </p>
 
-      <form onSubmit={submitForm}>
-        <label htmlFor="email">Email</label>
-
-        <br />
+        <label htmlFor="email" className="login-label">
+          Email
+        </label>
 
         <input
           id="email"
-          type="text"
+          type="email"
           placeholder="you@example.com"
+          className="login-input"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
         />
 
-        <br />
-        <br />
-
-        <label htmlFor="password">Password</label>
-
-        <br />
+        <label htmlFor="password" className="login-label">
+          Password
+        </label>
 
         <input
           id="password"
           type="password"
+          placeholder="Enter password"
+          className="login-input"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={e => setPassword(e.target.value)}
         />
 
-        <br />
-        <br />
+        <button type="submit" className="login-btn">
+          Sign in
+        </button>
 
-        <button type="submit">Sign in</button>
-
-        {errorMsg && (
-          <p style={{ color: "red" }}>
-            {errorMsg}
-          </p>
-        )}
+        {errorMsg && <p className="error-msg">{errorMsg}</p>}
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
